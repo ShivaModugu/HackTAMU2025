@@ -96,9 +96,9 @@ export const Hero = () => {
   </motion.div>
   {/*End Ring 3*/}
   <div className="container relative mt-16">
-    <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(138,32,32,.5))] text-transparent bg-clip-text text-center">AI SEO</h1>
+    <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(138,32,32,.5))] text-transparent bg-clip-text text-center">ToyoSense</h1>
     <p className="text-lg md:text-xl text-white/70 mt-5 text-center max-w-xl mx-auto">
-      Elevate your site's visibility effortlessly with AI,
+      Elevate your sites visibility effortlessly with AI,
       where smart techonolgoy uer-prently SEO Tools
     </p>
     <div className="flex justify-center mt-5">

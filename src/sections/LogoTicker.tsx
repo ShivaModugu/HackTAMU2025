@@ -1,5 +1,5 @@
 'use client';
-import acmeLogo from "@/assets/logo-acme.png";
+/*import acmeLogo from "@/assets/logo-acme.png";*/
 import apexLogo from "@/assets/logo-apex.png";
 import celestialLogo from '@/assets/logo-celestial.png';
 import quantumLogo from '@/assets/logo-quantum.png';
@@ -26,13 +26,13 @@ export const LogoTicker = () => {
             }}
           className="flex flex-none gap-14 pr-14 -translate-x-1/2">
           {[
-            acmeLogo,
+            /*acmeLogo,*/
             pulseLogo,
             echoLogo,
             celestialLogo,
             apexLogo,
             quantumLogo,
-            acmeLogo,
+            /*acmeLogo,*/
             pulseLogo,
             echoLogo,
             celestialLogo,

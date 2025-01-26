@@ -1,21 +1,8 @@
-import { Header } from "@/sections/Header";
-import { Hero } from "@/sections/Hero";
-import { LogoTicker } from "@/sections/LogoTicker";
-import { Features } from "@/sections/Features";
-import { Testimonials } from "@/sections/Testimonials";
-import { CallToAction } from "@/sections/CallToAction";
-import { Footer } from "@/sections/Footer";
+// src/app/page.tsx
+"use client";
+import React from "react";
+import Home from "@/pages/Index";
 
-export default function Home() {
-  return (
-    <>
-      <Header />
-      <Hero />
-      <LogoTicker />
-      <Features />
-      <Testimonials />
-      <CallToAction />
-      <Footer />
-    </>
-  );
+export default function HomePage() {
+  return <Home />;
 }
