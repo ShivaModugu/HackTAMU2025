@@ -357,13 +357,13 @@ if(data){
           />
           <input
             type="number"
-            placeholder="Number of Doors"
+            placeholder="Fuel Efficiency"
             className="border-2 border-red-300 p-2 rounded-lg w-full focus:ring-2 focus:ring-red-500 focus:outline-none"
             onChange={(e) => setFilters({ ...filters, doors: +e.target.value })}
           />
           <input
             type="number"
-            placeholder="Min Fuel Economy"
+            placeholder="Body Style"
             className="border-2 border-red-300 p-2 rounded-lg w-full focus:ring-2 focus:ring-red-500 focus:outline-none"
             onChange={(e) => setFilters({ ...filters, fuelEconomy: +e.target.value })}
           />

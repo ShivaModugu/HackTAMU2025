@@ -205,7 +205,7 @@
                 <h2>What's your budget range?</h2>
                 <div class="range-container">
                     <div class="budget-display">
-                        <span id="min_price">$20,000</span> - <span id="max_price">$80,000</span>
+                      <span id="min_price">$20,000</span> - <span id="max_price">$80,000</span>
                     </div>
                     <input type="range" class="range-slider" id="minRange" min="20000" max="200000" step="1000" value="20000">
                     <input type="range" class="range-slider" id="maxRange" min="20000" max="200000" step="1000" value="80000">
@@ -376,15 +376,15 @@
             // Budget Range
             const minRange = document.getElementById('minRange');
             const maxRange = document.getElementById('maxRange');
-            const minBudget = document.getElementById('minBudget');
-            const maxBudget = document.getElementById('maxBudget');
+            const min_price = document.getElementById('min_price');
+const max_price = document.getElementById('max_price');
 
-            function updateBudgetDisplay() {
-                minBudget.textContent = `$${parseInt(minRange.value).toLocaleString()}`;
-                maxBudget.textContent = `$${parseInt(maxRange.value).toLocaleString()}`;
-                selections.budget.min = parseInt(minRange.value);
-                selections.budget.max = parseInt(maxRange.value);
-            }
+function updateBudgetDisplay() {
+    min_price.textContent = `$${parseInt(minRange.value).toLocaleString()}`;
+    max_price.textContent = `$${parseInt(maxRange.value).toLocaleString()}`;
+    selections.budget.min = parseInt(minRange.value);
+    selections.budget.max = parseInt(maxRange.value);
+}
 
             minRange.addEventListener('input', function() {
                 if (parseInt(this.value) > parseInt(maxRange.value)) {

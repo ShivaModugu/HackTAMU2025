@@ -1,7 +1,7 @@
 "use client";
 import { DotLottieCommonPlayer, DotLottiePlayer } from "@dotlottie/react-player";
 import Image from "next/image";
-import productImage  from '@/assets/product-image.png';
+import productImage  from '@/assets/NewUI.png';
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from "react";
 import { animate, motion, useMotionTemplate, useMotionValue, ValueAnimationTransition } from "framer-motion";
 
@@ -24,7 +24,7 @@ const tabs = [
   },
   {
     icon: "/assets/lottie/stars.lottie",
-    title: "Smart keyword generator",
+    title: "AI Powered Quiz",
     isNew: true,
     backgroundPositionX: 100,
     backgroundPositionY: 27,

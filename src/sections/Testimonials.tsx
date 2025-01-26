@@ -9,27 +9,27 @@ import test from "node:test";
 import { motion } from "framer-motion";
 const testimonials = [
   {
-    text: "This product has completely transformed how I manage my projects and deadlines",
+    text: "This car finder has transformed how I search for my next vehicle. The filters make it incredibly simple.",
     name: "Sophia Perez",
-    title: "Director @ Quantum",
+    title: "First-Time Car Buyer",
     avatarImg: avatar1,
   },
   {
-    text: "These AI tools have completely revolutionized our SEO entire strategy overnight",
+    text: "The interface is so intuitive and easy to use, it has saved me hours of dealership visits.",
     name: "Jamie Lee",
-    title: "Founder @ Pulse",
+    title: "Family Vehicle Shopper",
     avatarImg: avatar2,
   },
   {
-    text: "The user interface is so intuitive and easy to use, it has saved us countless hours",
+    text: "These search tools have completely revolutionized how I shop for cars overnight.",
     name: "Alisa Hester",
-    title: "Product @ Innovate",
+    title: "Commuter Car Seeker",
     avatarImg: avatar3,
   },
   {
-    text: "Our team's productivity has increased significantly since we started using this tool",
+    text: "My car-buying experience has improved significantly since I started using this tool.",
     name: "Alec Whitten",
-    title: "CTO @ Tech Solutions",
+    title: "Car Enthusiast",
     avatarImg: avatar4,
   },
 ];
