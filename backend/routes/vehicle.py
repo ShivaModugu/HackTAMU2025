@@ -129,4 +129,84 @@ def get_cars_by_score():
         }), 500
     
 
+# 
+@vehicle_route.route('/get_cars_by_algo', methods=['GET'])
+def get_cars_by_algo():
+    print("Request Headers:", request.headers)
+    print("Request Data:", request.data)  # Raw request body
+    print("Request JSON:", request.json)
+    
+    data = request.json  # Ensure proper parsing of JSON input
+    
+    # Get parameters from the request
+    color_combo = data.get('Colors', '')  # Default to empty string if not provided
+    vehicle_type_v = data.get('Vehicle_Type', '')  # Default to empty string if not provided
+    min_price = data.get('Min_Price')  # Default to None if not provided
+    max_price = data.get('Max_Price')  # Default to None if not provided
+    fuel_type_v = data.get('Fuel_Type', '')  # Default to empty string if not provided
+    local_mpg_v = data.get('Local_MPG', None)  # Default to None if not provided
+    highway_mpog = data.get('Highway_MPG', None)  # Default to None if not provided
+    model_year = data.get('Model_Year', None)  # Default to None if not provided
+
+    try:
+        # Prepare the parameters for the stored procedure call
+
+        # Call the stored procedure
+        query = """CALL GetVehicleByScoreAdvanced(%s, %s, %s, %s, %s, %s, %s, %s)"""
+        result = db.execute_query(query, (color_combo,
+            vehicle_type_v,
+            min_price,
+            max_price,
+            fuel_type_v,
+            local_mpg_v,
+            highway_mpog,
+            model_year), fetchall=True)
+
+        if result:
+            return jsonify({
+                "Vehicles": result
+            }), 200
+        else:
+            return jsonify({
+                "message": "No cars found."
+            }), 404
+
+    except Exception as e:
+        return jsonify({
+            "message": f"Failed to fetch cars: {str(e)}"
+        }), 500
+
+@vehicle_route.route('/get_vehicle_details', methods=['GET'])
+def get_vehicle_details():
+    print("Request Headers:", request.headers)
+    print("Request Data:", request.data)  # Raw request body
+    print("Request JSON:", request.json)
+
+    # Parse the JSON input
+    data = request.json
+    sku_ids = data.get('Sku_ids')  # Get the SKU IDs from the request JSON
+
+    if not sku_ids:
+        return jsonify({
+            "message": "No SKU IDs provided."
+        }), 400
+
+    try:
+        # Call the stored procedure with the selected SKU IDs
+        query = """CALL GetVehicleDetailsBySKU(%s)"""
+        result = db.execute_query(query, (sku_ids,), fetchall=True)
+
+        if result:
+            return jsonify({
+                "Vehicles": result
+            }), 200
+        else:
+            return jsonify({
+                "message": "No vehicle details found for the provided SKU IDs."
+            }), 404
+
+    except Exception as e:
+        return jsonify({
+            "message": f"Failed to fetch vehicle details: {str(e)}"
+        }), 500
 
