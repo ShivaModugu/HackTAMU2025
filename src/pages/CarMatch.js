@@ -257,18 +257,18 @@ function calculateMatch(car, filters) {
 const CompareCard = ({ car, onRemove }) => (
   <Card className="shadow-lg bg-white rounded-lg border-2 border-red-200">
     <CardContent>
-      <img src={car.Car_Image_Link} alt={car.name} className="w-full h-40 object-contain bg-gray-100 rounded-t-lg mb-4" />
-      <h3 className="text-lg font-bold mb-2 text-red-900">{car.name}</h3>
+      <img src={car.Car_Image_Link} alt={car.Name} className="w-full h-40 object-contain bg-gray-100 rounded-t-lg mb-4" />
+      <h3 className="text-lg font-bold mb-2 text-red-900">{car.Name}</h3>
       
       <div className="space-y-2 text-sm">
-        <p className="text-red-800"><span className="font-semibold">Model Year:</span> {car.model_year}</p>
+        <p className="text-red-800"><span className="font-semibold">Model Year:</span> {car.Model_Year}</p>
         <p className="text-red-800"><span className="font-semibold">Starting Price:</span> ${car.Starting_Price.toLocaleString()}</p>
-        <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.local_mpg}</p>
-        <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.highway_mpg}</p>
-        <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.fuel_type}</p>
+        <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.Local_MPG}</p>
+        <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.Highway_MPG}</p>
+        <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.Fuel_Type}</p>
         <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.Car_Engine}</p>
         <p className="text-red-800"><span className="font-semibold">Color:</span> {car.Color}</p>
-        <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.vehicle_type}</p>
+        <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.Vehicle_Type}</p>
       </div>
 
       <div className="flex space-x-2 mt-4">
@@ -416,8 +416,8 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
         {(expanded ? filteredCars : filteredCars.slice(0, 3)).map((car) => (
           <Card key={car.SKU_ID} className="shadow-lg bg-white rounded-lg border-2 border-red-200 hover:shadow-xl transition-shadow">
             <CardContent>
-              <img src={car.Car_Image_Link} alt={car.name} className="w-full h-40 object-cover rounded-t-lg mb-4" />
-              <h3 className="text-lg font-bold mb-2 text-red-900">{car.name}</h3>
+              <img src={car.Car_Image_Link} alt={car.Name} className="w-full h-40 object-cover rounded-t-lg mb-4" />
+              <h3 className="text-lg font-bold mb-2 text-red-900">{car.Name}</h3>
               <p className="text-red-700">Match: {car.match}%</p>
               <div className="flex space-x-2">
                 <Button 
@@ -458,24 +458,24 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
               return (
                 <>
                   <h3 className="text-xl font-bold mb-4 text-red-900 border-b-2 border-red-200 pb-2">
-                    {car.name}
+                    {car.Name}
                   </h3>
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="space-y-2">
-                      <p className="text-red-800"><span className="font-semibold">Model Year:</span> {car.model_year}</p>
+                      <p className="text-red-800"><span className="font-semibold">Model Year:</span> {car.Model_Year}</p>
                       <p className="text-red-800"><span className="font-semibold">Starting Price:</span> ${car.Starting_Price.toLocaleString()}</p>
-                      <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.local_mpg}</p>
-                      <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.highway_mpg}</p>
+                      <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.Local_MPG}</p>
+                      <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.Highway_MPG}</p>
                     </div>
                     <div className="space-y-2">
-                      <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.fuel_type}</p>
-                      <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.car_engine}</p>
+                      <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.Fuel_Type}</p>
+                      <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.Car_Engine}</p>
                       <p className="text-red-800"><span className="font-semibold">Color:</span> {car.Color}</p>
-                      <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.vehicle_type}</p>
+                      <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.Vehicle_Type}</p>
                     </div>
                   </div>
                   <div className="border-t-2 border-red-200 pt-4">
-                    <p className="text-red-800 mb-4"><span className="font-semibold">Description:</span> {car.details}</p>
+                    
                     <div className="flex justify-end">
                       <Button 
                         className="bg-red-600 hover:bg-red-700 text-white" 
