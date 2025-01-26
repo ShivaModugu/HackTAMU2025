@@ -130,7 +130,7 @@ def get_cars_by_score():
     
 
 # 
-@vehicle_route.route('/get_cars_by_algo', methods=['GET'])
+@vehicle_route.route('/get_cars_by_algo', methods=['POST'])
 def get_cars_by_algo():
     print("Request Headers:", request.headers)
     print("Request Data:", request.data)  # Raw request body

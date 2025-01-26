@@ -101,6 +101,7 @@
             border-radius: 5px;
             outline: none;
             -webkit-appearance: none;
+            margin: 1rem 0;
         }
 
         .range-slider::-webkit-slider-thumb {
@@ -182,18 +183,21 @@
             <div class="form-section active" id="section1">
                 <h2>What type of vehicle are you looking for?</h2>
                 <div class="options-grid">
-                    <div class="option-card" data-value="Sedan">
+                    <div class="option-card" data-value="SEDAN">
                         <h3>Sedan</h3>
                     </div>
                     <div class="option-card" data-value="SUV">
                         <h3>SUV</h3>
                     </div>
-                    <div class="option-card" data-value="Sports Car">
-                        <h3>Sports Car</h3>
+                    <div class="option-card" data-value="COUPE">
+                        <h3>Coupe</h3>
                     </div>
-                    <div class="option-card" data-value="Electric">
-                        <h3>Electric</h3>
+                    <div class="option-card" data-value="TRUCK">
+                        <h3>Truck</h3>
                     </div>
+                    <div class="option-card" data-value="MINIVAN">
+                      <h3>Minivan</h3>
+                  </div>
                 </div>
             </div>
 
@@ -201,7 +205,7 @@
                 <h2>What's your budget range?</h2>
                 <div class="range-container">
                     <div class="budget-display">
-                        <span id="minBudget">$20,000</span> - <span id="maxBudget">$80,000</span>
+                        <span id="min_price">$20,000</span> - <span id="max_price">$80,000</span>
                     </div>
                     <input type="range" class="range-slider" id="minRange" min="20000" max="200000" step="1000" value="20000">
                     <input type="range" class="range-slider" id="maxRange" min="20000" max="200000" step="1000" value="80000">
@@ -227,6 +231,52 @@
                         <div class="color-preview" style="background-color: #FFFFFF;"></div>
                         <h3>White</h3>
                     </div>
+                    <div class="option-card" data-value="Gray">
+                      <div class="color-preview" style="background-color: #584c4c;"></div>
+                      <h3>Gray</h3>
+                  </div>
+                </div>
+            </div>
+
+            <div class="form-section" id="section4">
+                <h2>Fuel Type Preference</h2>
+                <div class="options-grid">
+                    <div class="option-card" data-value="Gasoline">
+                        <h3>Gasoline</h3>
+                    </div>
+                    <div class="option-card" data-value="Hybrid EV">
+                        <h3>Hybrid</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" id="section5">
+                <h2>Fuel Economy (MPG)</h2>
+                <div class="range-container">
+                    <h3>Local MPG</h3>
+                    <input type="range" class="range-slider" id="Local_MPG" min="0" max="150" value="25">
+                    <div class="budget-display">
+                        <span id="localMpgDisplay">25 MPG</span>
+                    </div>
+                    
+                    <h3>Highway MPG</h3>
+                    <input type="range" class="range-slider" id="Highway_MPG" min="0" max="150" value="30">
+                    <div class="budget-display">
+                        <span id="highwayMpgDisplay">30 MPG</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" id="section6">
+                <h2>Model Year</h2>
+                <div class="options-grid">
+                    <div class="option-card" data-value="2025">
+                        <h3>2025</h3>
+                    </div>
+                    <div class="option-card" data-value="2024">
+                        <h3>2024</h3>
+                    </div>
+                    
                 </div>
             </div>
 
@@ -257,7 +307,13 @@
                     min: 20000,
                     max: 80000
                 },
-                colors: []
+                colors: [],
+                fuelType: '',
+                mpg: {
+                    local: 25,
+                    highway: 30
+                },
+                modelYear: null
             };
 
             function updateNavigation() {
@@ -273,20 +329,20 @@
                 updateNavigation();
             }
 
-            // Handle option selection
-            document.querySelectorAll('.option-card').forEach(card => {
+            // Vehicle Type and Color Selection
+            document.querySelectorAll('#section1 .option-card, #section3 .option-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const value = this.dataset.value;
                     this.classList.toggle('selected');
 
-                    if (currentSection === 0) {
+                    if (this.closest('#section1')) {
                         const index = selections.vehicleTypes.indexOf(value);
                         if (index === -1) {
                             selections.vehicleTypes.push(value);
                         } else {
                             selections.vehicleTypes.splice(index, 1);
                         }
-                    } else if (currentSection === 2) {
+                    } else {
                         const index = selections.colors.indexOf(value);
                         if (index === -1) {
                             selections.colors.push(value);
@@ -297,7 +353,27 @@
                 });
             });
 
-            // Handle budget range
+            // Fuel Type Selection
+            document.querySelectorAll('#section4 .option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    document.querySelectorAll('#section4 .option-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selections.fuelType = value;
+                });
+            });
+
+            // Model Year Selection
+            document.querySelectorAll('#section6 .option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    document.querySelectorAll('#section6 .option-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selections.modelYear = parseInt(value);
+                });
+            });
+
+            // Budget Range
             const minRange = document.getElementById('minRange');
             const maxRange = document.getElementById('maxRange');
             const minBudget = document.getElementById('minBudget');
@@ -324,7 +400,22 @@
                 updateBudgetDisplay();
             });
 
-            // Navigation buttons
+            // MPG Ranges
+            const localMpgRange = document.getElementById('Local_MPG');
+            const highwayMpgRange = document.getElementById('Highway_MPG');
+            const localMpgDisplay = document.getElementById('localMpgDisplay');
+            const highwayMpgDisplay = document.getElementById('highwayMpgDisplay');
+
+            localMpgRange.addEventListener('input', function() {
+                selections.mpg.local = parseInt(this.value);
+                localMpgDisplay.textContent = `${this.value} MPG`;
+            });
+
+            highwayMpgRange.addEventListener('input', function() {
+                selections.mpg.highway = parseInt(this.value);
+                highwayMpgDisplay.textContent = `${this.value} MPG`;
+            });
+
             prevBtn.addEventListener('click', () => {
                 if (currentSection > 0) {
                     showSection(currentSection - 1);
@@ -335,7 +426,6 @@
                 if (currentSection < sections.length - 1) {
                     showSection(currentSection + 1);
                 } else {
-                    // Submit form
                     loading.classList.add('active');
                     nextBtn.disabled = true;
                     prevBtn.disabled = true;
@@ -345,17 +435,18 @@
                         Vehicle_Type: selections.vehicleTypes.join(','),
                         Min_Price: selections.budget.min,
                         Max_Price: selections.budget.max,
-                        Fuel_Type: '',
-                        Local_MPG: null,
-                        Highway_MPG: null,
-                        Model_Year: null
+                        Fuel_Type: selections.fuelType,
+                        Local_MPG: selections.mpg.local,
+                        Highway_MPG: selections.mpg.highway,
+                        Model_Year: selections.modelYear
                     };
-
+                    debugger;
                     try {
                         const response = await fetch('http://127.0.0.1:5000/api/vehicle/get_cars_by_algo', {
-                            method: 'GET',
+                            method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
+                                'Access-Control-Allow-Origin': '*'
                             },
                             body: JSON.stringify(requestData)
                         });
@@ -367,8 +458,7 @@
                         const data = await response.json();
                         
                         if (data.Vehicles && data.Vehicles.length > 0) {
-                            localStorage.setItem('carResults', JSON.stringify(data.Vehicles));
-                            window.location.href = '/results.html';
+                            window.location.href = '/CarMatch';
                         } else {
                             alert('No cars found matching your criteria. Please try different options.');
                         }
@@ -383,7 +473,6 @@
                 }
             });
 
-            // Initialize
             updateNavigation();
             updateBudgetDisplay();
         });
