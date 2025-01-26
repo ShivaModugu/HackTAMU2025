@@ -23,10 +23,10 @@ export const Header = () => {
                 Developers
               </a>
               <a href="#" className="text-white/70 hover:text-white transition">
-                Pricing
+                Leasing
               </a>
               <a href="#" className="text-white/70 hover:text-white transition">
-                Changelog
+                Finance
               </a>
             </nav>
           </div>
