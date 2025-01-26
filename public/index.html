@@ -440,7 +440,7 @@
                         Highway_MPG: selections.mpg.highway,
                         Model_Year: selections.modelYear
                     };
-                    debugger;
+              
                     try {
                         const response = await fetch('http://127.0.0.1:5000/api/vehicle/get_cars_by_algo', {
                             method: 'POST',
@@ -458,7 +458,8 @@
                         const data = await response.json();
                         
                         if (data.Vehicles && data.Vehicles.length > 0) {
-                            window.location.href = '/CarMatch';
+                            localStorage.setItem("filterVechiles",JSON.stringify(data.Vehicles));
+                            window.location.href = '/car';
                         } else {
                             alert('No cars found matching your criteria. Please try different options.');
                         }

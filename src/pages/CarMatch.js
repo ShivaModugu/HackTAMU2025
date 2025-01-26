@@ -280,7 +280,7 @@ const CompareCard = ({ car, onRemove }) => (
         </Button>
         <Button 
           className="bg-red-600 hover:bg-red-700 text-white"
-          onClick={() => window.location.href = '/carF'}
+          onClick={() => window.location.href = '/carF?id='+car.SKU_ID}
         >
           Select Vehicle
         </Button>
@@ -297,33 +297,21 @@ const CarMatch = () => {
   const [showCompareView, setShowCompareView] = useState(false);
   const [cars, setCars] = useState([])
 
-  useEffect(() => {
-    async function fetchCars() {
-      const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-
-/*const raw = JSON.stringify({
-  "Sku_ids": "17,26"
-});*/
-
-const requestOptions = {
-  method: "GET",
-  headers: myHeaders,
-  /*body: raw,*/
-  redirect: "follow"
-};
-
-let data = '';
-
-fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
-  .then((response) => response.json())
-  .then((result) => setCars(result.vehicles))
-  .catch((error) => console.error(error));
-  return data;
-    }
+ useEffect(() => {
+debugger;
+let data = localStorage.getItem("filterVechiles");
+if(data){
+   setCars(JSON.parse(data));
+}
+// fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
+//   .then((response) => response.json())
+//   .then((result) => setCars(result.vehicles))
+//   .catch((error) => console.error(error));
+//   return data;
+//     }
   
-    fetchCars()
-  },[])
+//     fetchCars()
+   },[])
 
   const filteredCars = cars
     .map((car) => ({ ...car, match: calculateMatch(car, filters) }))
@@ -418,7 +406,7 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
             <CardContent>
               <img src={car.Car_Image_Link} alt={car.Name} className="w-full h-40 object-cover rounded-t-lg mb-4" />
               <h3 className="text-lg font-bold mb-2 text-red-900">{car.Name}</h3>
-              <p className="text-red-700">Match: {car.match}%</p>
+              <p className="text-red-700">Match: {car.Rating}%</p>
               <div className="flex space-x-2">
                 <Button 
                   className="mt-4 bg-red-600 hover:bg-red-700 text-white" 

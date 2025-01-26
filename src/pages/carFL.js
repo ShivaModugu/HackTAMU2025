@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, Button, Input, Label, Alert, AlertDescription, Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/Components.tsx";
 import { MessageSquare, Send, X } from "lucide-react";
 
 const EnhancedCalculator = () => {
-  // State declarations remain the same
   const [calculatorType, setCalculatorType] = useState("finance");
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
+  const [filteredCar, setFilteredCar] = useState(null);
   const [financialInfo, setFinancialInfo] = useState({
     monthlyIncome: 0,
     mortgagePayment: 0,
@@ -25,9 +25,29 @@ const EnhancedCalculator = () => {
   const [payment, setPayment] = useState(null);
   const [aiAdvice, setAiAdvice] = useState(null);
 
-  // All calculation functions remain the same
+  useEffect(() => {
+    debugger;
+    const params = new URLSearchParams(window.location.search);
+    const skuId = params.get('id');
+    if (skuId) {
+      const cars = localStorage.getItem("filterVechiles");
+      if (cars) {
+        try {
+          const parsedCars = JSON.parse(cars);
+          const car = parsedCars.find(x => Number(x.SKU_ID) === Number(skuId));
+          if (car) {
+            setFilteredCar(car);
+            //setVehicleInfo(prev => ({...prev, price: car.price || prev.price}));
+          }
+        } catch (error) {
+          console.error('Error parsing cars data:', error);
+        }
+      }
+    }
+  }, []);
+
   const calculateFinancing = () => {
-    const loanAmount = vehicleInfo.price - vehicleInfo.downPayment;
+    const loanAmount = filteredCar.Starting_Price - vehicleInfo.downPayment;
     const monthlyRate = vehicleInfo.apr / 100 / 12;
     const monthlyPayment = (loanAmount * monthlyRate) / 
                           (1 - Math.pow(1 + monthlyRate, -vehicleInfo.term));
@@ -35,10 +55,10 @@ const EnhancedCalculator = () => {
   };
 
   const calculateLease = () => {
-    const residualAmount = (vehicleInfo.price * vehicleInfo.residualValue) / 100;
-    const depreciation = (vehicleInfo.price - residualAmount) / vehicleInfo.term;
+    const residualAmount = (filteredCar.Starting_Price * vehicleInfo.residualValue) / 100;
+    const depreciation = (filteredCar.Starting_Price - residualAmount) / vehicleInfo.term;
     const monthlyRate = vehicleInfo.apr / 100 / 12;
-    const financeFee = (vehicleInfo.price + residualAmount) * monthlyRate;
+    const financeFee = (filteredCar.Starting_Price + residualAmount) * monthlyRate;
     const monthlyPayment = depreciation + financeFee;
     analyzePayment(monthlyPayment);
   };
@@ -46,11 +66,13 @@ const EnhancedCalculator = () => {
   const analyzePayment = (monthlyPayment) => {
     setPayment(monthlyPayment.toFixed(2));
     const newDTI = (monthlyPayment + financialInfo.mortgagePayment + 
-                   financialInfo.otherDebts) / financialInfo.monthlyIncome;
+                   financialInfo.otherDebts) / (financialInfo.monthlyIncome || 1);
     setAiAdvice(generateAIAdvice(newDTI, calculatorType));
   };
 
   const generateAIAdvice = (dti, type) => {
+    if (!financialInfo.monthlyIncome) return "Please enter your monthly income for personalized advice.";
+    
     let advice = "";
     if (dti > 0.43) {
       advice = `This ${type} payment would put your debt-to-income ratio above recommended levels.`;
@@ -68,7 +90,7 @@ const EnhancedCalculator = () => {
   const handleChatSubmit = () => {
     if (!currentMessage.trim()) return;
     const userMessage = { type: "user", content: currentMessage };
-    let aiResponse = { type: "ai", content: generateChatResponse(currentMessage) };
+    const aiResponse = { type: "ai", content: generateChatResponse(currentMessage) };
     setMessages([...messages, userMessage, aiResponse]);
     setCurrentMessage("");
   };
@@ -80,6 +102,7 @@ const EnhancedCalculator = () => {
       credit: "Higher credit scores typically qualify you for better interest rates. We recommend a score of 660+ for optimal rates.",
       downpayment: "A larger down payment reduces your monthly payments and may help you qualify for better rates.",
     };
+    
     const lowerQuestion = question.toLowerCase();
     for (const [key, response] of Object.entries(responses)) {
       if (lowerQuestion.includes(key)) return response;
@@ -87,18 +110,18 @@ const EnhancedCalculator = () => {
     return "Please ask about leasing, financing, credit requirements, or down payments. I'm here to help!";
   };
 
+  if (!filteredCar) return <div className="p-4">Loading...</div>;
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-red-600 to-red-900 flex flex-col lg:flex-row">
-      {/* Vehicle Image Section */}
       <div className="w-full lg:w-1/2 p-4 flex justify-center items-center">
         <img
-          src="/CarImages/1.png"
+          src={`/CarImages/${filteredCar.SKU_ID}.png`}
           alt="Vehicle"
           className="w-full max-w-xl rounded-lg shadow-lg"
         />
       </div>
 
-      {/* Calculator Section */}
       <div className="w-full lg:w-1/2 p-4 flex justify-center items-center">
         <Card className="w-full max-w-lg text-black bg-white shadow-2xl rounded-3xl">
           <Tabs defaultValue="finance" onValueChange={setCalculatorType}>
@@ -108,7 +131,6 @@ const EnhancedCalculator = () => {
             </TabsList>
 
             <CardContent className="space-y-4 p-4">
-              {/* Input Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label className="text-sm font-medium text-gray-700">Monthly Income ($)</Label>
@@ -132,7 +154,7 @@ const EnhancedCalculator = () => {
                   <Label className="text-sm font-medium text-gray-700">Vehicle Price ($)</Label>
                   <Input
                     type="number"
-                    value={vehicleInfo.price}
+                    value={filteredCar.Starting_Price}
                     onChange={(e) => setVehicleInfo({...vehicleInfo, price: Number(e.target.value)})}
                     className="mt-1 border-red-500"
                   />
@@ -181,7 +203,6 @@ const EnhancedCalculator = () => {
         </Card>
       </div>
 
-      {/* Chatbot - Bottom Left */}
       <div className="fixed bottom-4 left-4 z-50">
         {!chatOpen ? (
           <Button
@@ -212,7 +233,7 @@ const EnhancedCalculator = () => {
                 >
                   <div
                     className={`rounded-lg p-3 max-w-[80%] ${
-                      msg.type === "user" ? "bg-red-600 text-white" : "bg-gray-100"
+                      msg.type === "user" ? "bg-red-600 text-black" : "bg-black"
                     }`}
                   >
                     {msg.content}
