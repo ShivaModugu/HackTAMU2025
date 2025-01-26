@@ -65,4 +65,36 @@ def get_cars_by_fuel_type():
     
 
 
+#
+@vehicle_route.route ('/get_cars_by_filter' , methods=['GET'])
+def get_cars_by_filter():
+    print("Request Headers:", request.headers)
+    print("Request Data:", request.data)  # Raw request body
+    print("Request JSON:", request.json)
+    data = request.json  # Ensure proper parsing of JSON input
+    min_price = data.get('Min_Price')
+    max_price = data.get('Max_Price')
+    color_combo = data.get('Color_Combo')
+    vehicle_type = data.get('Vehicle_Type')
+    try:
+        # Call the stored procedure
+        query = """CALL GetCarsByFilter(%s,%s,%s,%s)"""
+        result = db.execute_query(query, (min_price, max_price, color_combo, vehicle_type), fetchall=True)
+
+        if result:
+            return jsonify({
+                "Vehicles": result
+            }), 200
+        else:
+            return jsonify({
+                "message": "No cars found. "
+            }), 404
+
+    except Exception as e:
+        return jsonify({
+            "message": f"Failed to fetch cars: {str(e)}"
+        }), 500
+    
+
+
 
