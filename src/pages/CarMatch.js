@@ -266,7 +266,7 @@ const CompareCard = ({ car, onRemove }) => (
         <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.local_mpg}</p>
         <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.highway_mpg}</p>
         <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.fuel_type}</p>
-        <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.car_engine}</p>
+        <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.Car_Engine}</p>
         <p className="text-red-800"><span className="font-semibold">Color:</span> {car.Color}</p>
         <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.vehicle_type}</p>
       </div>
