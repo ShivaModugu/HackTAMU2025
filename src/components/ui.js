@@ -9,15 +9,16 @@ export const CardComponent = ({
 }) => {
   return (
     <motion.div 
-      whileHover={hover ? { scale: 1.02 } : false}
+      whileHover={hover ? { scale: 1.05 } : false}
       transition={{ type: "spring", stiffness: 300 }}
       className={`
         bg-white 
-        rounded-lg 
-        shadow-md 
+        rounded-xl 
+        shadow-lg 
         border 
-        border-gray-200 
+        border-gray-300 
         overflow-hidden 
+        hover:shadow-2xl 
         transition-all 
         duration-300 
         ease-in-out
@@ -37,20 +38,23 @@ export const Button = ({
   ...props 
 }) => {
   const variantStyles = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700',
-    secondary: 'bg-gray-500 text-white hover:bg-gray-600',
-    danger: 'bg-red-500 text-white hover:bg-red-600',
-    success: 'bg-green-500 text-white hover:bg-green-600',
-    outline: 'border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
+    secondary: 'bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-400',
+    danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400',
+    success: 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-400',
+    outline: 'border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white focus:ring-blue-400',
   };
 
   return (
     <motion.button
       whileTap={{ scale: 0.95 }}
       className={`
-        px-4 
-        py-2 
-        rounded-md 
+        px-5 
+        py-3 
+        text-sm 
+        font-medium 
+        rounded-lg 
+        shadow-md 
         transition-all 
         duration-300 
         ease-in-out 
@@ -70,7 +74,7 @@ export const Button = ({
 export const CardContent = ({ children, className = '', ...props }) => {
   return (
     <div 
-      className={`p-4 ${className}`}
+      className={`p-6 ${className}`}
       {...props}
     >
       {children}
@@ -81,7 +85,7 @@ export const CardContent = ({ children, className = '', ...props }) => {
 export const CardHeader = ({ children, className = '', ...props }) => {
   return (
     <div 
-      className={`px-4 pt-4 pb-2 border-b border-gray-200 ${className}`}
+      className={`px-6 pt-4 pb-2 border-b border-gray-300 font-semibold text-lg text-gray-800 ${className}`}
       {...props}
     >
       {children}

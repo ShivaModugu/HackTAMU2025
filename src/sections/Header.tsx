@@ -31,7 +31,7 @@ export const Header = () => {
             </nav>
           </div>
           <div className="flex gap-4 items-center">
-            <a href="/index.html"><Button>Join waitlist</Button></a>
+            <a href="/index.html"><Button>Explore Models</Button></a>
             <MenuIcon className ="md:hidden"/>
           </div>
         </div>

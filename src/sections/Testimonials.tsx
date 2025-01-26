@@ -40,8 +40,8 @@ export const Testimonials = () => {
     <div className="container">
       <h2 className="text-5xl md:text-6xl text-center tracking-tighter font-medium">Beyond Expectations.</h2>
       <p className="text-white/70 text-lg md:text-xl text-center mt-5 tracking-tight max-w-sm mx-auto">
-        Our revolutionary ToSense tools have transformed our clients
-        strategies.
+        Our revolutionary tools have transformed our clients
+        lives.
       </p>
       <div className="flex overflow-hidden mt-10 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
         <motion.div

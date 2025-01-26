@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cosmic Bank Account Application</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <title>Dream Car Selector</title>
   <style>
     * {
       margin: 0;
@@ -14,7 +13,8 @@
     }
 
     body {
-      background-color: #840e0ee9;
+      background: linear-gradient(to bottom, #450202, #840e0e);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -22,200 +22,311 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(rgba(132, 14, 14, 0.9), rgba(132, 14, 14, 0.9));
-      z-index: -2;
-    }
-
-    .toyota-car {
-      position: absolute;
-      width: 200px;
-      height: 100px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.5;
-      z-index: -1;
-      animation: moveCars linear infinite;
-    }
-
-    .camry {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150'%3E%3Cpath fill='%23FFFFFF' d='M50 100 Q150 50 250 100 L250 120 Q150 80 50 120 Z'/%3E%3Cpath fill='%23C0C0C0' d='M60 90 Q150 40 240 90 L240 100 Q150 60 60 100 Z'/%3E%3Ccircle cx='90' cy='130' r='20' fill='%23000000'/%3E%3Ccircle cx='210' cy='130' r='20' fill='%23000000'/%3E%3C/svg%3E");
-      animation-duration: 30s;
-    }
-
-    .supra {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 150'%3E%3Cpath fill='%23FF0000' d='M50 100 Q150 30 250 100 L250 120 Q150 50 50 120 Z'/%3E%3Cpath fill='%23800000' d='M70 90 Q150 20 230 90 L230 100 Q150 40 70 100 Z'/%3E%3Ccircle cx='100' cy='130' r='20' fill='%23000000'/%3E%3Ccircle cx='200' cy='130' r='20' fill='%23000000'/%3E%3C/svg%3E");
-      animation-duration: 40s;
-    }
-
-    @keyframes moveCars {
-      from { transform: translateX(-150%); }
-      to { transform: translateX(150%); }
-    }
-
     .container {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      border-radius: 32px;
+      border-radius: 20px;
       box-shadow: 0 5px 15px rgba(255, 76, 76, 0.3);
+      width: 90%;
+      max-width: 800px;
+      padding: 2rem;
       position: relative;
-      overflow: hidden;
-      width: 100%;
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 2.5rem;
-      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* Rest of the previous CSS remains the same as in the original document */
-    /* (Full original CSS included here, just showing abbreviated version) */
-    h2 {
+    .main-header {
+      width: 100%;
       text-align: center;
       margin-bottom: 2rem;
-      font-size: 2.5rem;
-      background: white;
-      background: linear-gradient(to right, white, rgba(255, 76, 76, 0.7));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 800;
-      line-height: 1.2;
-      text-shadow: 0 4px 6px rgba(255, 76, 76, 0.2);
     }
 
+    .main-header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #FF0000, #FF6B6B);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .carousel-container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .carousel-item {
+      display: none;
+      width: 100%;
+      text-align: center;
+    }
+
+    .carousel-item.active {
+      display: block;
+    }
+
+    .carousel-item h2 {
+      margin-bottom: 1.5rem;
+      color: #FF4C4C;
+    }
 
     .form-group {
       margin-bottom: 1.5rem;
+      width: 100%;
+    }
+
+    .box-options {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .box-option {
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: rgba(255, 76, 76, 0.1);
+    }
+
+    .box-option:hover {
+      border-color: #FF4C4C;
+    }
+
+    .box-option.selected {
+      border-color: #FF4C4C;
+      background-color: rgba(255, 76, 76, 0.3);
+    }
+
+    .color-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+    }
+
+    .budget-range-container {
+      width: 100%;
       position: relative;
     }
 
-    label {
-      display: block;
-      margin-bottom: 0.75rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.8);
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-    }
-
-    input, select, textarea {
+    .budget-range {
+      -webkit-appearance: none;
       width: 100%;
-      padding: 1rem 1.25rem;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 20px;
-      box-sizing: border-box;
-      font-size: 1rem;
-      background-color: rgba(255, 76, 76, 0.1);
-      color: black;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    input:focus, select:focus, textarea:focus {
+      height: 15px;
+      background: linear-gradient(to right, #FF4C4C, #FF4C4C);
       outline: none;
-      border-color: #FF4C4C;
-      box-shadow: 0 0 0 4px rgba(255, 76, 76, 0.3);
+      opacity: 0.7;
+      transition: opacity .2s;
+      margin: 15px 0;
     }
 
-    input::placeholder, textarea::placeholder {
-      color: rgba(255,255,255,0.5);
-      font-weight: 300;
+    .budget-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: white;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid #FF4C4C;
+    }
+
+    .budget-range-value {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #FF4C4C;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 500px;
     }
 
     button {
-      width: 100%;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 10px;
       background: linear-gradient(45deg, #FF4C4C, #C21807);
       color: white;
-      padding: 1.25rem;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 25px;
+      font-weight: bold;
       cursor: pointer;
-      transition: all 0.4s ease;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 0 10px 25px rgba(215, 4, 4, 0.3);
-    }
-
-    button a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      width: 100%;
-      height: 100%;
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(255, 76, 76, 0.4);
+      transform: translateY(-3px);
       background: linear-gradient(45deg, #FF6B6B, #E53935);
     }
 
-    @media (max-width: 640px) {
-      .container {
-        margin: 20px auto;
-        padding: 1.5rem;
-        width: 92%;
-      }
-      h2 {
-        font-size: 2rem;
-      }
-      input, select, textarea, button {
-        font-size: 0.95rem;
-        padding: 0.9rem 1rem;
-      }
+    .launch-button {
+      margin-top: 1rem;
+    }
+
+    .launch-button a {
+      color: white;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Rotating Rings -->
-    <div class="ring ring-1"></div>
-    <div class="ring ring-2"></div>
-    <div class="ring ring-3"></div>
+    <div class="main-header">
+      <h1>Are You Ready to Discover Your Dream Car?</h1>
+    </div>
+    
+    <div class="carousel-container">
+      <div class="carousel-item active" id="step1">
+        <h2>Select Car Types (Multiple)</h2>
+        <div class="form-group">
+          <div class="box-options" id="carTypeOptions">
+            <div class="box-option" data-value="Sedan">Sedan</div>
+            <div class="box-option" data-value="Coupe">Coupe</div>
+            <div class="box-option" data-value="Truck">Truck</div>
+          </div>
+        </div>
+      </div>
 
-    <h2>Cosmic Bank Account Application</h2>
-    <form action="/submit" method="POST">
-      <div class="form-group">
-        <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" name="fullname" placeholder="Enter your cosmic identity" required>
+      <div class="carousel-item" id="step2">
+        <h2>What is Your Budget Range?</h2>
+        <div class="form-group">
+          <div class="budget-range-value" id="budgetRangeDisplay">$20,000 - $80,000</div>
+          <div class="budget-range-container">
+            <input type="range" id="budgetRange" class="budget-range" min="1000" max="100000" value="20000" data-type="min">
+          </div>
+          <div class="budget-range-container">
+            <input type="range" id="budgetRange2" class="budget-range" min="1000" max="100000" value="80000" data-type="max">
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Your intergalactic contact point" required>
+
+      <div class="carousel-item" id="step3">
+        <h2>Choose Colors (Multiple)</h2>
+        <div class="form-group">
+          <div class="box-options" id="colorOptions">
+            <div class="box-option" data-value="Red">
+              <div class="color-box" style="background-color: red;"></div>
+              Red
+            </div>
+            <div class="box-option" data-value="Blue">
+              <div class="color-box" style="background-color: blue;"></div>
+              Blue
+            </div>
+            <div class="box-option" data-value="Black">
+              <div class="color-box" style="background-color: black;"></div>
+              Black
+            </div>
+            <div class="box-option" data-value="White">
+              <div class="color-box" style="background-color: white; border: 1px solid #ccc;"></div>
+              White
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="Interstellar communication channel" required>
+
+      <div class="carousel-item" id="step4">
+        <div class="summary">
+          <p>Review your selections</p>
+          <button type="submit" class="launch-button">
+            <a href="/car">Finish</a>
+          </button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="accountType">Account Type</label>
-        <select id="accountType" name="accountType" required>
-          <option value="savings">Stellar Savings Account</option>
-          <option value="checking">Cosmic Checking Account</option>
-          <option value="business">Galactic Business Account</option>
-        </select>
+
+      <div class="navigation">
+        <button id="prevBtn" style="display: none;">Previous</button>
+        <button id="nextBtn">Next</button>
       </div>
-      <div class="form-group">
-        <label for="address">Address</label>
-        <textarea id="address" name="address" placeholder="Your planetary coordinates" rows="3" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="income">Annual Income</label>
-        <input type="number" id="income" name="income" placeholder="Your cosmic economic contribution" required>
-      </div>
-      <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob" required>
-      </div>
-      <button type="submit"><a href="/car">Launch Application</a></button>
-    </form>
+    </div>
   </div>
+
+  <script>
+    const slides = document.querySelectorAll('.carousel-item');
+    const prevButton = document.getElementById('prevBtn');
+    const nextButton = document.getElementById('nextBtn');
+    const budgetRange = document.getElementById('budgetRange');
+    const budgetRange2 = document.getElementById('budgetRange2');
+    const budgetRangeDisplay = document.getElementById('budgetRangeDisplay');
+
+    let currentSlide = 0;
+    const selections = {
+      carTypes: [],
+      budgetRange: { min: 20000, max: 80000 },
+      colors: []
+    };
+
+    function updateSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      prevButton.style.display = index === 0 ? 'none' : 'inline-block';
+      
+      // Hide Next button on the last slide
+      nextButton.style.display = index === slides.length - 1 ? 'none' : 'inline-block';
+    }
+
+    document.querySelectorAll('.box-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        
+        if (currentSlide === 0) {  // Car Types
+          this.classList.toggle('selected');
+          selections.carTypes = Array.from(
+            document.querySelectorAll('#carTypeOptions .selected')
+          ).map(el => el.getAttribute('data-value'));
+        } else if (currentSlide === 2) {  // Colors
+          this.classList.toggle('selected');
+          selections.colors = Array.from(
+            document.querySelectorAll('#colorOptions .selected')
+          ).map(el => el.getAttribute('data-value'));
+        }
+      });
+    });
+
+    function updateBudgetRange() {
+      let min = Math.min(parseInt(budgetRange.value), parseInt(budgetRange2.value));
+      let max = Math.max(parseInt(budgetRange.value), parseInt(budgetRange2.value));
+
+      budgetRange.value = min;
+      budgetRange2.value = max;
+
+      selections.budgetRange.min = min;
+      selections.budgetRange.max = max;
+
+      budgetRangeDisplay.textContent = `$${min.toLocaleString()} - $${max.toLocaleString()}`;
+
+      const percent1 = ((min - budgetRange.min) / (budgetRange.max - budgetRange.min)) * 100;
+      const percent2 = ((max - budgetRange.min) / (budgetRange.max - budgetRange.min)) * 100;
+      budgetRange.style.background = `linear-gradient(to right, #ddd ${percent1}%, #FF4C4C ${percent1}%, #FF4C4C ${percent2}%, #ddd ${percent2}%)`;
+      budgetRange2.style.background = `linear-gradient(to right, #ddd ${percent1}%, #FF4C4C ${percent1}%, #FF4C4C ${percent2}%, #ddd ${percent2}%)`;
+    }
+
+    budgetRange.addEventListener('input', updateBudgetRange);
+    budgetRange2.addEventListener('input', updateBudgetRange);
+
+    nextButton.addEventListener('click', () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide(currentSlide);
+      }
+    });
+
+    prevButton.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide(currentSlide);
+      }
+    });
+
+    // Initial budget range update
+    updateBudgetRange();
+  </script>
 </body>
 </html>

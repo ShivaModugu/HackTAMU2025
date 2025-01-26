@@ -95,16 +95,18 @@ export const Hero = () => {
     <div className="absolute h-2 w-2 left-full bg-white rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
   </motion.div>
   {/*End Ring 3*/}
-  <div className="container relative mt-16">
-    <h1 className="text-8xl md:text-[168px] md:leading-none font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(138,32,32,.5))] text-transparent bg-clip-text text-center">ToSense</h1>
-    <p className="text-lg md:text-xl text-white/70 mt-5 text-center max-w-xl mx-auto">
-      Elevate your sites visibility effortlessly with AI,
-      where smart techonolgoy uer-prently SEO Tools
-    </p>
-    <div className="flex justify-center mt-5">
-      <a href="/index.html"><Button>Join waitlist</Button></a>
-    </div>
+  <div className="container relative mt-16 pt-16 pb-16 md:pt-20 md:pb-20">
+  <h1 className="text-8xl md:text-[168px] leading-tight md:leading-[1.2] font-semibold tracking-tighter bg-white bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(138,32,32,.5))] text-transparent bg-clip-text text-center">
+    Ryota
+  </h1>
+  <p className="text-lg md:text-xl text-white/70 mt-5 text-center max-w-xl mx-auto">
+    Elevate your experience effortlessly with AI-powered tools to help you find your dream ride.
+  </p>
+  <div className="flex justify-center mt-5">
+    <a href="/index.html"><Button>Explore Models</Button></a>
   </div>
+</div>
+
   </motion.section>
   );
 };
