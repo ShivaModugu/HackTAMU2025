@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+**_Important_**
+Full code is under shiva_dev branch
 
-## Getting Started
+**Project Overview
+**
+Ryota is an innovative solution designed to help users easily search, compare, and find their dream Toyota vehicles. Leveraging advanced AI and an intuitive user interface, the platform ensures a seamless car-shopping experience tailored to individual preferences.
 
-First, run the development server:
+**Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+AI-Powered Recommendations: The platform uses AI to suggest vehicles based on user preferences such as budget, fuel efficiency, and desired features.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Compare Vehicles: Users can compare multiple Toyota models side by side, evaluating specifications, pricing, and performance metrics.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Finance Calculator: An integrated calculator helps users estimate monthly payments based on financing or leasing options.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Interactive Search Filters: Filters allow users to refine search results by model, year, price range, and more.
 
-## Learn More
+Dynamic Visualizations: High-quality images and interactive 3D models showcase vehicle details.
 
-To learn more about Next.js, take a look at the following resources:
+**Tech Stack
+**
+Frontend: Node.js React.js with Tailwind CSS for a responsive and modern user interface.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Backend: Flask and Python to handle server-side operations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Database: MySQL for storing vehicle data and user preferences.
 
-## Deploy on Vercel
+APIs: Integration with Toyota’s vehicle data API for real-time updates.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+AI Features: Python and OpenAI for personalized recommendations.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Usage**
+
+Navigate to the homepage to explore Toyota’s vehicle lineup.
+
+Use the search and filter options to narrow down choices.
+
+Compare selected vehicles to find the best fit.
+
+Utilize the finance calculator to estimate payment plans.
+
