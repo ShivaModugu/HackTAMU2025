@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { CardComponent as Card, Button, CardContent, CardHeader } from '@/components/ui';
 
@@ -248,7 +248,7 @@ const cars = [
 
 function calculateMatch(car, filters) {
   let match = 100;
-  if (filters.price && car.Starting_Price > filters.price) match -= 20;
+  if (filters.price && car.price > filters.price) match -= 20;
   if (filters.doors && car.doors !== filters.doors) match -= 30;
   if (filters.fuelEconomy && car.fuelEconomy < filters.fuelEconomy) match -= 20;
   return match;
@@ -257,17 +257,17 @@ function calculateMatch(car, filters) {
 const CompareCard = ({ car, onRemove }) => (
   <Card className="shadow-lg bg-white rounded-lg border-2 border-red-200">
     <CardContent>
-      <img src={car.Car_Image_Link} alt={car.name} className="w-full h-40 object-contain bg-gray-100 rounded-t-lg mb-4" />
+      <img src={car.image} alt={car.name} className="w-full h-40 object-contain bg-gray-100 rounded-t-lg mb-4" />
       <h3 className="text-lg font-bold mb-2 text-red-900">{car.name}</h3>
       
       <div className="space-y-2 text-sm">
         <p className="text-red-800"><span className="font-semibold">Model Year:</span> {car.model_year}</p>
-        <p className="text-red-800"><span className="font-semibold">Starting Price:</span> ${car.Starting_Price.toLocaleString()}</p>
+        <p className="text-red-800"><span className="font-semibold">Starting Price:</span> ${car.price.toLocaleString()}</p>
         <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.local_mpg}</p>
         <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.highway_mpg}</p>
         <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.fuel_type}</p>
         <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.car_engine}</p>
-        <p className="text-red-800"><span className="font-semibold">Color:</span> {car.Color}</p>
+        <p className="text-red-800"><span className="font-semibold">Color:</span> {car.color}</p>
         <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.vehicle_type}</p>
       </div>
 
@@ -295,35 +295,6 @@ const CarMatch = () => {
   const [compare, setCompare] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [showCompareView, setShowCompareView] = useState(false);
-  const [cars, setCars] = useState([])
-
-  useEffect(() => {
-    async function fetchCars() {
-      const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-
-/*const raw = JSON.stringify({
-  "Sku_ids": "17,26"
-});*/
-
-const requestOptions = {
-  method: "GET",
-  headers: myHeaders,
-  /*body: raw,*/
-  redirect: "follow"
-};
-
-let data = '';
-
-fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
-  .then((response) => response.json())
-  .then((result) => setCars(result.vehicles))
-  .catch((error) => console.error(error));
-  return data;
-    }
-  
-    fetchCars()
-  },[])
 
   const filteredCars = cars
     .map((car) => ({ ...car, match: calculateMatch(car, filters) }))
@@ -331,10 +302,10 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
 
   const handleCompare = (car) => {
     setCompare((prev) => {
-      if (prev.includes(car.SKU_ID)) {
-        return prev.filter((id) => id !== car.SKU_ID);
+      if (prev.includes(car.id)) {
+        return prev.filter((id) => id !== car.id);
       } else if (prev.length < 3) {
-        return [...prev, car.SKU_ID];
+        return [...prev, car.id];
       }
       return prev;
     });
@@ -392,13 +363,13 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
           <h2 className="text-xl font-bold mb-4 text-red-900">Compare Cars</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {compare.map((id) => {
-              const car = cars.find((car) => car.SKU_ID === id);
+              const car = cars.find((car) => car.id === id);
               return (
                 <CompareCard
-                  key={car.SKU_ID}
+                  key={car.id}
                   car={car}
-                  onRemove={() => setCompare(compare.filter((cid) => cid !== car.SKU_ID))}
-                  onSelect={() => handleSelectVehicle(car.SKU_ID)}
+                  onRemove={() => setCompare(compare.filter((cid) => cid !== car.id))}
+                  onSelect={() => handleSelectVehicle(car.id)}
                 />
               );
             })}
@@ -414,26 +385,23 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {(expanded ? filteredCars : filteredCars.slice(0, 3)).map((car) => (
-          <Card key={car.SKU_ID} className="shadow-lg bg-white rounded-lg border-2 border-red-200 hover:shadow-xl transition-shadow">
+          <Card key={car.id} className="shadow-lg bg-white rounded-lg border-2 border-red-200 hover:shadow-xl transition-shadow">
             <CardContent>
-              <img src={car.Car_Image_Link} alt={car.name} className="w-full h-40 object-cover rounded-t-lg mb-4" />
+              <img src={car.image} alt={car.name} className="w-full h-40 object-cover rounded-t-lg mb-4" />
               <h3 className="text-lg font-bold mb-2 text-red-900">{car.name}</h3>
               <p className="text-red-700">Match: {car.match}%</p>
               <div className="flex space-x-2">
                 <Button 
                   className="mt-4 bg-red-600 hover:bg-red-700 text-white" 
-                  onClick={() => {
-                    setShowDetails(car.SKU_ID)
-                    console.log(car.Car_Image_Link);
-                  }}
+                  onClick={() => setShowDetails(car.id)}
                 >
                   Show Details
                 </Button>
                 <Button
-                  className={`mt-4 ${compare.includes(car.SKU_ID) ? 'bg-red-400' : 'bg-red-600'} hover:bg-red-700 text-white`}
+                  className={`mt-4 ${compare.includes(car.id) ? 'bg-red-400' : 'bg-red-600'} hover:bg-red-700 text-white`}
                   onClick={() => handleCompare(car)}
                 >
-                  {compare.includes(car.SKU_ID) ? "Remove" : "Compare"}
+                  {compare.includes(car.id) ? "Remove" : "Compare"}
                 </Button>
               </div>
             </CardContent>
@@ -454,7 +422,7 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div className="bg-white p-6 rounded-lg max-w-lg w-full border-4 border-red-600 shadow-2xl">
             {(() => {
-              const car = cars.find((car) => car.SKU_ID === showDetails);
+              const car = cars.find((car) => car.id === showDetails);
               return (
                 <>
                   <h3 className="text-xl font-bold mb-4 text-red-900 border-b-2 border-red-200 pb-2">
@@ -463,14 +431,14 @@ fetch("http://127.0.0.1:5000/api/vehicle/get_all_vehicles", requestOptions)
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="space-y-2">
                       <p className="text-red-800"><span className="font-semibold">Model Year:</span> {car.model_year}</p>
-                      <p className="text-red-800"><span className="font-semibold">Starting Price:</span> ${car.Starting_Price.toLocaleString()}</p>
+                      <p className="text-red-800"><span className="font-semibold">Starting Price:</span> ${car.price.toLocaleString()}</p>
                       <p className="text-red-800"><span className="font-semibold">Local MPG:</span> {car.local_mpg}</p>
                       <p className="text-red-800"><span className="font-semibold">Highway MPG:</span> {car.highway_mpg}</p>
                     </div>
                     <div className="space-y-2">
                       <p className="text-red-800"><span className="font-semibold">Fuel Type:</span> {car.fuel_type}</p>
                       <p className="text-red-800"><span className="font-semibold">Engine:</span> {car.car_engine}</p>
-                      <p className="text-red-800"><span className="font-semibold">Color:</span> {car.Color}</p>
+                      <p className="text-red-800"><span className="font-semibold">Color:</span> {car.color}</p>
                       <p className="text-red-800"><span className="font-semibold">Vehicle Type:</span> {car.vehicle_type}</p>
                     </div>
                   </div>
