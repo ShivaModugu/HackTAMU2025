@@ -176,7 +176,7 @@ def get_cars_by_algo():
             "message": f"Failed to fetch cars: {str(e)}"
         }), 500
 
-@vehicle_route.route('/get_vehicle_details', methods=['GET'])
+@vehicle_route.route('/get_vehicle_details', methods=['POST'])
 def get_vehicle_details():
     print("Request Headers:", request.headers)
     print("Request Data:", request.data)  # Raw request body
@@ -210,3 +210,29 @@ def get_vehicle_details():
             "message": f"Failed to fetch vehicle details: {str(e)}"
         }), 500
 
+
+@vehicle_route.route('/get_all_vehicles', methods=['GET'])
+def get_all_vehicles():
+    try:
+        # Query to fetch all records from the Sku table
+        query = "CALL GetAllVehicles()"
+
+
+        result = db.execute_query(query, fetchall=True)
+
+        if result:
+            # If records are found, return the result as JSON
+            return jsonify({
+                "vehicles": result
+            }), 200
+        else:
+            # If no records are found
+            return jsonify({
+                "message": "No vehicles found."
+            }), 404
+
+    except Exception as e:
+        # Handle any errors
+        return jsonify({
+            "message": f"Failed to fetch vehicles: {str(e)}"
+        }), 500
