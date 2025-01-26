@@ -254,7 +254,7 @@ function calculateMatch(car, filters) {
   return match;
 }
 
-const CompareCard = ({ car, onRemove, onSelect }) => (
+const CompareCard = ({ car, onRemove }) => (
   <Card className="shadow-lg bg-white rounded-lg border-2 border-red-200">
     <CardContent>
       <img src={car.image} alt={car.name} className="w-full h-40 object-contain bg-gray-100 rounded-t-lg mb-4" />
@@ -280,7 +280,7 @@ const CompareCard = ({ car, onRemove, onSelect }) => (
         </Button>
         <Button 
           className="bg-red-600 hover:bg-red-700 text-white"
-          onClick={onSelect}
+          onClick={() => window.location.href = '/carF'}
         >
           Select Vehicle
         </Button>
