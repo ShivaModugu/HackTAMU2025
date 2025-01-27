@@ -1,4 +1,4 @@
-# 🚗 Toyota Car Shopping Assistant
+# 🚗 Ryota - A Toyota Car Shopping Assistant
 
 Helping users find their dream Toyota vehicles with ease!
 
