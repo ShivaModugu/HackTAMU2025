@@ -1,4 +1,4 @@
-Here’s the entire README in Markdown code format for you to copy and paste directly into your `.readme` file:
+Here's the updated README including the note about custom APIs for calculations and recommendations:
 
 ```markdown
 # 🚗 **Toyota Car Shopping Assistant**  
@@ -17,6 +17,7 @@ The **Toyota Car Shopping Assistant** is an AI-powered web application designed 
 ### 🤖 **AI-Powered Recommendations**  
 - Integrated **OpenAI's GPT API** to provide intelligent, context-aware suggestions.  
 - Personalized recommendations based on user preferences like budget, model, and financing options.  
+- Leveraged **custom APIs** to perform percentage-based calculations and provide optimized results based on user quiz/questionnaire inputs.
 
 ### 📊 **Comprehensive Vehicle Data**  
 - Access to Toyota vehicle specifications, pricing, and financing details using a structured SQL database.  
@@ -68,6 +69,7 @@ The **Toyota Car Shopping Assistant** is an AI-powered web application designed 
 
 ### **AI Integration**  
 - **OpenAI GPT API** for intelligent, context-aware suggestions  
+- **Custom APIs** for advanced calculations based on user inputs  
 
 ---
 
@@ -126,15 +128,15 @@ The **Toyota Car Shopping Assistant** is an AI-powered web application designed 
 
 ## 🎉 **How It Works**  
 1. **Enter Preferences:** Users input preferences like budget, model, and features.  
-2. **AI Suggestions:** The platform uses AI to provide tailored vehicle recommendations.  
-3. **Compare Vehicles:** Users can compare specs side-by-side for informed decisions.  
-4. **Save Searches:** Favorites can be saved for future reference.  
+2. **API Suggestions:** The platform uses AIP to provide tailored vehicle recommendations.  
+3. **Custom Calculations:** Custom APIs analyze user inputs from quizzes/questionnaires to deliver percentage-based optimized results.  
+4. **Compare Vehicles:** Users can compare specs side-by-side for informed decisions.  
+5. **Save Searches:** Favorites can be saved for future reference.  
 
 ---
 
 ## ✨ **Future Enhancements**  
-- **📱 Mobile App Integration:** Expand functionality to Android and iOS platforms.  
-- **🏦 Finance Tools:** Add EMI and budget calculators for better financial planning.  
+- **🏦 Finance Tools:** Add fully implemented RAG AI for better financial planning.
 - **🌎 Localization:** Support for multiple languages for global accessibility.  
 
 ---
@@ -145,17 +147,3 @@ We welcome contributions to improve the project! To contribute:
 2. Create a new feature branch.  
 3. Commit your changes and push them.  
 4. Open a pull request for review.  
-
----
-
-## 📝 **License**  
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.  
-
----
-
-## 📞 **Contact**  
-For inquiries or suggestions:  
-📧 **Email:** shivamodugu@gmail.com  
-```
-
-You can copy this code and paste it directly into your `.readme` file. Let me know if you need additional edits! 😊
