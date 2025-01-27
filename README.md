@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚗 **Toyota Car Shopping Assistant**  
+Helping users find their dream Toyota vehicles with ease!  
 
-## Getting Started
+## 🌟 **Overview**  
+The **Toyota Car Shopping Assistant** is an AI-powered web application designed to deliver a seamless and personalized car-shopping experience. This platform leverages modern technologies and AI to help users search, compare, and choose Toyota vehicles tailored to their preferences.  
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔧 **Features**  
+### 🌐 **Dynamic Web Interface**  
+- Built with **HTML**, **CSS**, **JavaScript**, **TypeScript**, and styled using **Tailwind CSS** for a visually engaging and responsive design.  
+- Developed with **Next.js** for fast, server-side rendering and efficient routing.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🤖 **AI-Powered Recommendations**  
+- Integrated **OpenAI's GPT API** to provide intelligent, context-aware suggestions.  
+- Personalized recommendations based on user preferences like budget, model, and financing options.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📊 **Comprehensive Vehicle Data**  
+- Access to Toyota vehicle specifications, pricing, and financing details using a structured SQL database.  
+- Powerful filtering options to refine searches and compare vehicles effectively.  
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 🔗 **Seamless Backend Integration**  
+- Backend powered by **Flask** and **Python** for robust API management and logic handling.  
+- Efficient data fetching and real-time query processing for smooth user experiences.
 
-## Learn More
+### 🚀 **Real-Time Performance**  
+- Optimized database queries with **SQL** to handle large datasets and ensure accurate results.  
+- Scalable and responsive architecture for handling multiple users concurrently.  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📂 **Folder Structure**  
+```plaintext
+📁 ToyotaCarAssistant
+├── 📂 src
+│   ├── 📂 components         # React components (UI)
+│   ├── 📂 pages              # Next.js pages and routing
+│   ├── 📂 styles             # Tailwind CSS and custom styles
+│   ├── 📂 utils              # Utility functions (e.g., API handlers)
+│   └── 📂 assets             # Images and static files
+├── 📂 backend
+│   ├── app.py                # Flask backend application
+│   ├── models.py             # SQL database models
+│   └── routes.py             # Flask API endpoints
+├── 📂 database
+│   └── schema.sql            # SQL schema for database setup
+├── 📜 package.json           # Node.js dependencies
+├── 📜 README.md              # Project documentation (this file)
+└── 📜 .env                   # API keys and sensitive data
