@@ -4,7 +4,7 @@ Helping users find their dream Toyota vehicles with ease!
 
 ## 🌟 Overview
 
-The **Toyota Car Shopping Assistant** is an AI-powered web application designed to deliver a seamless and personalized car-shopping experience. This platform leverages modern technologies and AI to help users search, compare, and choose Toyota vehicles tailored to their preferences. All the code is in branch shiva_dev.
+The **Toyota Car Shopping Assistant** is an AI-powered web application designed to deliver a seamless and personalized car-shopping experience. This platform leverages modern technologies and AI to help users search, compare, and choose Toyota vehicles tailored to their preferences. **All the code is in branch shiva_dev.**
 
 ---
 
